@@ -2,7 +2,6 @@ import { createClient } from "@supabase/supabase-js";
 import { Database } from "../supabase/database.types";
 import { AtomicRateLimiter } from "./db/AtomicRateLimiter";
 import { RequestWrapper } from "./lib/RequestWrapper";
-import { RosettaWrapper } from "./lib/rosetta/RosettaWrapper";
 import { updateLoopUsers } from "./lib/updateLoopsUsers";
 import { buildRouter } from "./routers/routerFactory";
 import { AlertManager } from "./AlertManager";
@@ -136,8 +135,8 @@ export default {
       env.SUPABASE_SERVICE_ROLE_KEY
     );
     if (controller.cron === "0 * * * *") {
-      const rosetta = new RosettaWrapper(supabaseClient, env);
-      await rosetta.generateMappers();
+      // const rosetta = new RosettaWrapper(supabaseClient, env);
+      // await rosetta.generateMappers();
     } else {
       await updateLoopUsers(env);
       const alertManager = new AlertManager(

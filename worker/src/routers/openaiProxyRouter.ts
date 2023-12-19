@@ -48,7 +48,9 @@ export const getOpenAIProxyRouter = (router: BaseRouter) => {
         });
       }
 
-      return await proxyForwarder(requestWrapper, env, ctx, "OPENAI");
+      const forward = await proxyForwarder(requestWrapper, env, ctx, "OPENAI");
+
+      return forward;
     }
   );
 

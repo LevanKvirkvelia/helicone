@@ -45,6 +45,7 @@ export async function callProvider(props: CallProps): Promise<Response> {
   const init = method === "GET" ? { ...baseInit } : { ...baseInit, body };
 
   let response;
+
   if (increaseTimeout) {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -54,7 +55,11 @@ export async function callProvider(props: CallProps): Promise<Response> {
       signal,
     });
   } else {
+    const timeStart = Date.now();
     response = await fetch(new_url.href, init);
+    const timeEnd = Date.now();
+    console.log(`Time taken: ${timeEnd - timeStart}ms`);
   }
+
   return response;
 }

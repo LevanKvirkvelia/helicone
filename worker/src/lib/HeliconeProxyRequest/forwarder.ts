@@ -85,6 +85,7 @@ export async function proxyForwarder(
   }
 
   const { data, error } = await handleProxyRequest(proxyRequest);
+
   if (error !== null) {
     return responseBuilder.build({
       body: error,
